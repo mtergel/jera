@@ -24,13 +24,13 @@
     "test:preload": "vitest run -r packages/preload --passWithNoTests",
     "test:renderer": "vitest run -r packages/renderer --passWithNoTests",
     "watch": "node scripts/watch.mjs",
-    "lint": "eslint . --ext js,mjs,cjs,ts,mts,cts,jsx,tsx",
+    "lint": "eslint . --ext mjs,cjs,ts,mts,cts,jsx,tsx",
     "typecheck:main": "tsc --noEmit -p packages/main/tsconfig.json",
     "typecheck:preload": "tsc --noEmit -p packages/preload/tsconfig.json",
     "typecheck:renderer": "tsc --noEmit -p packages/renderer/tsconfig.json",
     "typecheck": "npm run typecheck:main && npm run typecheck:preload && npm run typecheck:renderer",
     "postinstall": "cross-env ELECTRON_RUN_AS_NODE=1 electron scripts/update-electron-vendors.mjs",
-    "format": "npx prettier --write \"**/*.{js,mjs,cjs,ts,mts,cts,json}\""
+    "format": "npx prettier --write \"**/*.{mjs,cjs,ts,mts,cts,json}\""
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.2",
