@@ -1,16 +1,12 @@
 {
-  "name": "vite-electron-builder",
-  "description": "Secure boilerplate for Electron app based on Vite",
+  "name": "jera",
+  "description": "Jera - Electron based Markdown editor",
   "private": true,
   "engines": {
     "node": ">=v16.13",
     "npm": ">=8.1"
   },
-  "author": {
-    "email": "kozackunisoft@gmail.com",
-    "name": "Alex Kozack",
-    "url": "https://kozack.me"
-  },
+  "author": "Tergel Munkhdelger", 
   "main": "packages/main/dist/index.cjs",
   "scripts": {
     "build": "npm run build:main && npm run build:preload && npm run build:renderer",
