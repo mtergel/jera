@@ -1,11 +1,12 @@
 import './security-restrictions';
-import * as config from '/@/lib/config';
+import * as config from './lib/config';
 import {app} from 'electron';
-import {restoreOrCreateWindow} from '/@/mainWindow';
+import {restoreOrCreateWindow} from './mainWindow';
 
 // setup config
-console.log('Running setup');
 config.setup();
+
+app.config = config;
 
 /**
  * Prevent electron from running multiple instances.

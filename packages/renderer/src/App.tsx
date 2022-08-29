@@ -1,17 +1,33 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import useConfigStore from './lib/config';
+import {subscribeConfig} from '#preload';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const loadConfig = useConfigStore(state => state.loadConfig);
+
+  useEffect(() => {
+    // setup callback
+    subscribeConfig(() => {
+      loadCfg();
+    });
+
+    const loadCfg = async () => {
+      await loadConfig();
+      setLoading(false);
+    };
+
+    loadCfg();
+  }, []);
+
+  if (loading) {
+    return null;
+  }
+
   return (
-    <div>
-      <h1 className="font-bold text-3xl">Vite + React</h1>
-      <div>
-        <button onClick={() => setCount(count => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-        <p>HRW For the Win!</p>
-      </div>
+    <div className="p-6 bg-base text-t-primary">
+      <p className="text-t-muted">Hey psst!</p>
+      <p className="text-t-muted">The world is yours boss.</p>
     </div>
   );
 }

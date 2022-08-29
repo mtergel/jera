@@ -1,4 +1,4 @@
-import notify from '/@/lib/notify';
+import notify from '../lib/notify';
 import vm from 'vm';
 
 const _extract = (script?: vm.Script): Record<string, any> => {

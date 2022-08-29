@@ -20,7 +20,7 @@ const applicationDirectory =
 let cfgDir = applicationDirectory;
 let cfgPath = join(applicationDirectory, cfgFile);
 
-const devDir = resolve(__dirname, '../../');
+const devDir = resolve(__dirname, '../');
 const devCfg = join(devDir, cfgFile);
 const defaultCfg = resolve(__dirname, defaultCfgFile);
 

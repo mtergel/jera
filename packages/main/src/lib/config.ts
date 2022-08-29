@@ -1,8 +1,8 @@
 import chokidar from 'chokidar';
 import notify from './notify';
-import {_import, getDefaultConfig} from '/@/config/import';
-import {cfgPath, cfgDir} from '/@/config/paths';
-import {getColorMap} from '/@/utils/colors';
+import {_import, getDefaultConfig} from '../config/import';
+import {cfgPath, cfgDir} from '../config/paths';
+import {getColorMap} from '../utils/colors';
 import {app} from 'electron';
 
 const watchers: Function[] = [];

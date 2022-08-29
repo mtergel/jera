@@ -3,9 +3,9 @@ import {resolve, basename} from 'path';
 import {writeFileSync} from 'fs';
 import Config from 'electron-store';
 import * as config from './config';
-import notify from '/@/lib/notify';
+import notify from '../lib/notify';
 import {availableExtensions} from '../plugins/extensions';
-import {plugs} from '/@/config/paths';
+import {plugs} from '../config/paths';
 import {promisify} from 'util';
 import {exec, execFile} from 'child_process';
 import {install} from '../plugins/install';
@@ -302,12 +302,16 @@ export const getDecoratedConfig = () => {
 
 export {toDependencies as _toDependencies};
 
-ipcMain.handle('child_process.exec', (event, args) => {
+ipcMain.handle('child_process.exec', (_, args) => {
   const {command, options} = args;
   return promisify(exec)(command, options);
 });
 
-ipcMain.handle('child_process.execFile', (event, _args) => {
+ipcMain.handle('child_process.execFile', (_, _args) => {
   const {file, args, options} = _args;
   return promisify(execFile)(file, args, options);
+});
+
+ipcMain.handle('config:get', _ => {
+  return getDecoratedConfig();
 });
