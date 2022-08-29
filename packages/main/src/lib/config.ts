@@ -26,7 +26,7 @@ const _watch = () => {
     // Need to wait 100ms to ensure that write is complete
     setTimeout(() => {
       cfg = _import();
-      notify('Configuration updated', 'Hyper configuration reloaded!');
+      notify('Configuration updated', 'Jera configuration reloaded!');
       watchers.forEach(fn => {
         fn();
       });

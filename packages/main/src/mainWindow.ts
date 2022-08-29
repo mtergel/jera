@@ -4,9 +4,11 @@ import {URL} from 'url';
 import toElectronBackgroundColor from './utils/to-electron-background-color';
 
 async function createWindow() {
-  const plugins = await import('/@/lib/plugins');
+  // load plugins module
+  const plugins = await import('./lib/plugins');
   app.plugins = plugins;
 
+  // get decorated config;
   let cfg = plugins.getDecoratedConfig();
 
   const browserWindow = new BrowserWindow({
@@ -41,6 +43,14 @@ async function createWindow() {
     cfg = cfg_;
   });
 
+  // plugin changes
+  const pluginsUnsubscribe = app.plugins.subscribe((err: any) => {
+    if (!err) {
+      browserWindow.webContents.send('plugins change');
+      updateBackgroundColor();
+    }
+  });
+
   /**
    * If the 'show' property of the BrowserWindow's constructor is omitted from the initialization options,
    * it then defaults to 'true'. This can cause flickering as the window loads the html content,
@@ -59,6 +69,7 @@ async function createWindow() {
 
   browserWindow.on('close', () => {
     cfgUnsubscribe();
+    pluginsUnsubscribe();
   });
 
   /**

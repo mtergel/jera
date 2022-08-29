@@ -12,7 +12,7 @@ const homeDirectory = homedir();
 // otherwise use the home directory in linux/mac and userdata in windows
 const applicationDirectory =
   process.env.XDG_CONFIG_HOME !== undefined
-    ? join(process.env.XDG_CONFIG_HOME, 'hyper')
+    ? join(process.env.XDG_CONFIG_HOME, 'jera')
     : process.platform == 'win32'
     ? app.getPath('userData')
     : homedir();
