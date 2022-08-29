@@ -3,11 +3,18 @@
     "browser": true,
     "node": false
   },
-  "extends": ["plugin:react/recommended"],
+  "extends": ["plugin:react/recommended", "plugin:react/jsx-runtime"],
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "rules": {}
+  "rules": {
+    "react/prop-types": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }

@@ -3,8 +3,15 @@ import {join} from 'path';
 import {URL} from 'url';
 
 async function createWindow() {
+  const plugins = await import('/@/lib/plugins');
+  const cfg = plugins.getDecoratedConfig();
+
   const browserWindow = new BrowserWindow({
     show: false, // Use the 'ready-to-show' event to show the instantiated BrowserWindow.
+    title: 'Jera Notes',
+    minWidth: 700,
+    minHeight: 370,
+    backgroundColor: cfg.colors.base,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
