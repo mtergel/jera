@@ -1,6 +1,7 @@
 import {app, BrowserWindow} from 'electron';
 import {join} from 'path';
 import {URL} from 'url';
+import windowStateKeeper from 'electron-window-state';
 import toElectronBackgroundColor from './utils/to-electron-background-color';
 
 async function createWindow() {
@@ -11,11 +12,20 @@ async function createWindow() {
   // get decorated config;
   let cfg = plugins.getDecoratedConfig();
 
+  const mainWindowState = windowStateKeeper({
+    defaultHeight: 800,
+    defaultWidth: 1000,
+  });
+
   const browserWindow = new BrowserWindow({
     show: false, // Use the 'ready-to-show' event to show the instantiated BrowserWindow.
     title: 'Jera Notes',
     minWidth: 700,
     minHeight: 370,
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    width: mainWindowState.width,
+    height: mainWindowState.height,
     backgroundColor: cfg.colors.base,
     webPreferences: {
       nodeIntegration: false,
@@ -50,6 +60,9 @@ async function createWindow() {
       updateBackgroundColor();
     }
   });
+
+  // register window manager
+  mainWindowState.manage(browserWindow);
 
   /**
    * If the 'show' property of the BrowserWindow's constructor is omitted from the initialization options,

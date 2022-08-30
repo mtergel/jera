@@ -6,7 +6,7 @@
     "node": ">=v16.13",
     "npm": ">=8.1"
   },
-  "author": "Tergel Munkhdelger", 
+  "author": "Tergel Munkhdelger",
   "main": "packages/main/dist/index.cjs",
   "scripts": {
     "build": "npm run build:main && npm run build:preload && npm run build:renderer",
@@ -59,10 +59,12 @@
     "color": "^4.2.3",
     "electron-store": "^8.1.0",
     "electron-updater": "5.2.1",
+    "electron-window-state": "^5.0.3",
     "fs-extra": "^10.1.0",
     "mkdirp": "^1.0.4",
     "queue": "^6.0.2",
     "react": "^18.2.0",
+    "react-debounce-input": "^3.3.0",
     "react-dom": "^18.2.0",
     "recast": "^0.21.2",
     "zustand": "^4.1.1"
