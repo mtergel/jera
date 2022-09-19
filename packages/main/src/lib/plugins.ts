@@ -9,7 +9,7 @@ import {plugs} from '../config/paths';
 import {promisify} from 'util';
 import {exec, execFile} from 'child_process';
 import {install} from '../plugins/install';
-import * as api from './api';
+// import {list} from './api';
 
 // local storage
 const cache = new Config();
@@ -315,16 +315,4 @@ ipcMain.handle('child_process.execFile', (_, _args) => {
 
 ipcMain.handle('config:get', _ => {
   return getDecoratedConfig();
-});
-
-ipcMain.handle('plugins:get', _ => {
-  return api.list();
-});
-
-ipcMain.handle('plugins:install', (_, plugin, locally) => {
-  return api.install(plugin, locally);
-});
-
-ipcMain.handle('plugins:uninstall', (_, plugin) => {
-  return api.uninstall(plugin);
 });

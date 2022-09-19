@@ -1,5 +1,3 @@
-@import "./assets/poppins.css";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,10 +9,18 @@
     @apply border-line;
   }
 
+  *,
+  a,
+  button {
+    cursor: default;
+    user-select: none;
+  }
+
   html,
   body,
   #root {
     @apply h-full bg-b-base text-t-primary;
+    font-size: var(--font-size, 12px);
   }
 }
 

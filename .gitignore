@@ -60,3 +60,4 @@ thumbs.db
 # Optional dev config file and plugins directory
 .jera.js
 .jera_plugins
+packages/.jera.js

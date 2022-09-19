@@ -1,7 +1,11 @@
 import './security-restrictions';
 import * as config from './lib/config';
-import {app} from 'electron';
+import {app, crashReporter} from 'electron';
 import {restoreOrCreateWindow} from './mainWindow';
+
+crashReporter.start({
+  uploadToServer: false,
+});
 
 // setup config
 config.setup();

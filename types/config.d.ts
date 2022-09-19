@@ -4,10 +4,12 @@ type ColorMap = {
   textPrimary: string;
   textMuted: string;
   sidebarBase: string;
+  sidebarActive: string;
 };
 
 type configOptions = {
   fontFamily: string;
+  fontSize: number;
   colors: ColorMap;
 };
 

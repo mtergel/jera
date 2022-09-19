@@ -25,6 +25,9 @@ const config = {
       strict: true,
     },
   },
+  define: {
+    global: 'window',
+  },
   build: {
     sourcemap: true,
     target: `chrome${chrome}`,

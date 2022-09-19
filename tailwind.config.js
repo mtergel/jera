@@ -14,11 +14,18 @@ module.exports = {
           primary: 'var(--color-text-primary)',
           muted: 'var(--color-text-muted)',
         },
+        accent: {
+          sidebar: 'var(--color-sidebar-active)',
+        },
         line: 'var(--color-line)',
       },
 
       fontFamily: {
         sans: ['var(--font-system)', ...defaultTheme.fontFamily.sans],
+      },
+
+      width: {
+        sidebar: '130px',
       },
     },
   },

@@ -1,12 +1,18 @@
+import recast from 'recast';
 import fs from 'fs';
-import * as recast from 'recast';
-import {cfgPath} from '../config/paths';
-import axios from 'axios';
 import {promisify} from 'util';
-import registryUrlModule from 'registry-url';
-const registryUrl = registryUrlModule();
-
+import {cfgPath} from '../config/paths';
+import rc from 'rc';
+import {ipcMain} from 'electron';
 const fileName = cfgPath;
+
+function registryUrl(scope?: string) {
+  const result = rc('npm', {registry: 'https://registry.npmjs.org/'});
+  const url = result[`${scope}:registry`] || result.config_registry || result.registry;
+  return url.slice(-1) === '/' ? url : `${url}/`;
+}
+
+const rUrl = registryUrl();
 
 /**
  * We need to make sure the file reading and parsing is lazy so that failure to
@@ -76,7 +82,6 @@ function isInstalled(plugin: string, locally?: boolean) {
 }
 
 const save = async () => {
-  // const pify = (await import('pify')).default;
   return promisify(fs.writeFile)(fileName, recast.print(getParsedFile()).code, 'utf8');
 };
 
@@ -93,8 +98,9 @@ function getPackageName(plugin: string) {
 
 async function existsOnNpm(plugin: string) {
   const name = getPackageName(plugin);
+  const axios = (await import('axios')).default;
   return axios
-    .get(registryUrl + name.toLowerCase(), {
+    .get(rUrl + name.toLowerCase(), {
       timeout: 10000,
       responseType: 'json',
     })
@@ -147,6 +153,18 @@ function list() {
   }
   return false;
 }
+
+ipcMain.handle('plugins:get', _ => {
+  return list();
+});
+
+ipcMain.handle('plugins:install', (_, plugin, locally) => {
+  return install(plugin, locally);
+});
+
+ipcMain.handle('plugins:uninstall', (_, plugin) => {
+  return uninstall(plugin);
+});
 
 export const configPath = fileName;
 export {exists, existsOnNpm, isInstalled, install, uninstall, list};

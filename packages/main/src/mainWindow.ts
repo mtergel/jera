@@ -27,6 +27,11 @@ async function createWindow() {
     width: mainWindowState.width,
     height: mainWindowState.height,
     backgroundColor: cfg.colors.base,
+    titleBarStyle: 'hiddenInset',
+    trafficLightPosition: {
+      x: 19,
+      y: 19,
+    },
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -64,6 +69,9 @@ async function createWindow() {
   // register window manager
   mainWindowState.manage(browserWindow);
 
+  // setup api
+  await import('./lib/api');
+
   /**
    * If the 'show' property of the BrowserWindow's constructor is omitted from the initialization options,
    * it then defaults to 'true'. This can cause flickering as the window loads the html content,
@@ -75,9 +83,9 @@ async function createWindow() {
   browserWindow.on('ready-to-show', () => {
     browserWindow?.show();
 
-    if (import.meta.env.DEV) {
-      browserWindow?.webContents.openDevTools();
-    }
+    // if (import.meta.env.DEV) {
+    //   browserWindow?.webContents.openDevTools();
+    // }
   });
 
   browserWindow.on('close', () => {
