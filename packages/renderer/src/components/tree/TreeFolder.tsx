@@ -1,6 +1,6 @@
 import useTree from './useTree';
 import shallow from 'zustand/shallow';
-import {TbChevronRight} from 'react-icons/tb';
+import {TbChevronRight, TbFolder} from 'react-icons/tb';
 import {useCallback} from 'react';
 import clsx from 'clsx';
 import useNotebook from '/@/lib/notebook';
@@ -67,40 +67,44 @@ const TreeFolder: React.FC<TreeFolderProps> = ({folder, parentPath, level}) => {
     >
       <div
         onClick={handleOnClick}
-        className="relative px-3"
-        style={{
-          marginLeft: `calc(1rem * ${level * 0.875})`,
-        }}
+        className={clsx(
+          'rounded-lg py-2 px-4',
+          isSelected ? 'bg-accent-sidebar text-t-primary' : 'text-t-muted',
+        )}
       >
         <div
-          className={clsx(
-            'flex items-center rounded-md px-1 h-9',
-            isSelected ? 'bg-accent-sidebar text-t-primary' : 'text-t-muted',
-          )}
+          style={{
+            paddingLeft: `calc(1rem * ${level * 0.875})`,
+          }}
+          className="flex items-center gap-2"
         >
-          <div className="w-5 flex-shrink-0">
-            {folder.children && (
-              <div onClick={toggleOpen}>
-                <TbChevronRight
-                  className={clsx(
-                    'transition-all delay-75',
-                    isOpen
-                      ? 'rotate-90 text-t-primary'
-                      : isSelected
-                      ? 'text-t-primary'
-                      : 'text-t-muted',
-                  )}
-                />
-              </div>
+          <span>
+            {folder.children ? (
+              <TbChevronRight
+                className={clsx(
+                  'transition-all delay-75',
+                  isOpen
+                    ? 'rotate-90 text-t-primary'
+                    : isSelected
+                    ? 'text-t-primary'
+                    : 'text-t-muted',
+                )}
+                onClick={toggleOpen}
+              />
+            ) : (
+              <TbFolder />
             )}
-          </div>
-          <div className="flex-grow pl-1.5">
-            <span>{folder.name}</span>
-          </div>
+          </span>
+          <span className="flex-1">{folder.name}</span>
         </div>
       </div>
       {isOpen && folder.children && (
-        <ul>
+        <ul
+          tabIndex={0}
+          aria-multiselectable={false}
+          role="tree"
+          aria-label={folder.name}
+        >
           {Object.values(folder.children).map(child => (
             <TreeFolder
               key={child._id}

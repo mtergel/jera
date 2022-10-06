@@ -4,6 +4,7 @@ import {subscribeConfig} from '#preload';
 import Layout from './components/layout/Layout';
 import _set from 'lodash/set';
 import {IconContext} from 'react-icons';
+import {Provider} from '@radix-ui/react-tooltip';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -33,15 +34,13 @@ function App() {
         size: '20px',
       }}
     >
-      <Layout>
-        <div className="p-6">
-          <p className="text-3xl">The quick brown fox jumps over the lazy dog</p>
-          <p className="text-2xl">The quick brown fox jumps over the lazy dog</p>
-          <p className="text-xl">The quick brown fox jumps over the lazy dog</p>
-          <p className="text-lg">The quick brown fox jumps over the lazy dog</p>
-          <p className="text-base">The quick brown fox jumps over the lazy dog</p>
-        </div>
-      </Layout>
+      <Provider>
+        <Layout>
+          <div className="p-6">
+            <p className="text-3xl">The quick brown fox jumps over the lazy dog</p>
+          </div>
+        </Layout>
+      </Provider>
     </IconContext.Provider>
   );
 }

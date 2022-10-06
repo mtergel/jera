@@ -1,0 +1,24 @@
+.iconButton {
+  @apply inline-flex items-center justify-center relative appearance-none;
+  @apply rounded-md;
+  @apply outline-none transition-all;
+
+  @apply p-1;
+
+  & svg {
+    @apply w-5 h-5;
+  }
+
+  &:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  &:focus,
+  &:hover {
+    @apply bg-white/10;
+  }
+
+  &:active {
+    @apply bg-white/20;
+  }
+}
