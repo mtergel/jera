@@ -75,6 +75,7 @@
     "react": "^18.2.0",
     "react-debounce-input": "^3.3.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.37.0",
     "react-icons": "^4.4.0",
     "react-resizable": "^3.0.4",
     "recast": "^0.21.2",

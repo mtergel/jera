@@ -2,9 +2,7 @@ import {useEffect} from 'react';
 import Sidebar from './Sidebar';
 import useNotebook from '/@/lib/notebook';
 
-interface LayoutProps {}
-
-const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({children}) => {
+const Layout: React.FC<React.PropsWithChildren> = ({children}) => {
   // load folders from db into memory
   const loadFolders = useNotebook(state => state.loadFolders);
 

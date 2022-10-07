@@ -7,12 +7,16 @@ interface SectionHeaderProps {
 
 const SectionHeader: React.FC<React.PropsWithChildren<SectionHeaderProps>> = ({title, actions}) => {
   return (
-    <div className="mb-1 flex items-start justify-between">
-      <span className="text-sm font-medium tracking-wide text-t-muted">{title}</span>
+    <div className="mb-1 flex items-center justify-between">
+      <span className="text-sm font-semibold text-t-muted">{title}</span>
       {actions && (
         <div className="flex-shrink-0 flex items-center gap-1">
           {actions.map(action => (
-            <IconButton label={action.name}>
+            <IconButton
+              label={action.name}
+              key={action.name}
+              onClick={action.onClick}
+            >
               <action.icon />
             </IconButton>
           ))}

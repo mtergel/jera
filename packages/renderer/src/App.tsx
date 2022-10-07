@@ -34,7 +34,7 @@ function App() {
         size: '20px',
       }}
     >
-      <Provider>
+      <Provider delayDuration={450}>
         <Layout>
           <div className="p-6">
             <p className="text-3xl">The quick brown fox jumps over the lazy dog</p>

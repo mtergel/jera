@@ -12,11 +12,20 @@ interface NotebookState {
   // loading folders from db
   isFoldersLoading: boolean;
 
+  // creating new folder
+  isCreatingNewFolder: boolean;
+
   // on select folder handler
   onSelect: (folder: Folder | null) => void;
 
   // load from database
   loadFolders: () => Promise<void>;
+
+  // enter new folder mode
+  enterNewFolderMode: () => void;
+
+  // exit new folder mode
+  exitNewFolderMode: () => void;
 }
 
 const handleReadData = async (callback: (input: FolderPath) => void) => {
@@ -49,6 +58,7 @@ const useNotebook = create<NotebookState>()(set => ({
   selected: null,
   folders: {},
   isFoldersLoading: false,
+  isCreatingNewFolder: false,
 
   onSelect: folder =>
     set(() => ({
@@ -64,6 +74,16 @@ const useNotebook = create<NotebookState>()(set => ({
       });
     });
   },
+
+  enterNewFolderMode: () =>
+    set(() => ({
+      isCreatingNewFolder: true,
+    })),
+
+  exitNewFolderMode: () =>
+    set(() => ({
+      isCreatingNewFolder: false,
+    })),
 }));
 
 export default useNotebook;

@@ -22,7 +22,7 @@ const Tree: React.FC<TreeProps> = ({folders, onClick}) => {
       aria-multiselectable={false}
       role="tree"
       aria-label="folders"
-      className="flex flex-col flex-wrap"
+      className="flex flex-col flex-wrap relative"
     >
       {Object.values(folders).map(folder => (
         <TreeFolder

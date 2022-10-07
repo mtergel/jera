@@ -36,4 +36,5 @@ const IconButton = forwardRef<Ref, ButtonProps>((props, ref) => {
   );
 });
 
+IconButton.displayName = 'IconButton';
 export default IconButton;

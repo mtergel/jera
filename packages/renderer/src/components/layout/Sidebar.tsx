@@ -2,18 +2,29 @@ import {Section, SectionHeader} from './section';
 import useNotebook from '/@/lib/notebook';
 import shallow from 'zustand/shallow';
 import Tree from '/@/components/tree/Tree';
-import {TbFolderPlus, TbRefresh} from 'react-icons/tb';
+import {FiFolderPlus, FiRefreshCw} from 'react-icons/fi';
+import NewFolder from '../tree/NewFolder';
 
 const initialSidebarWidth = '15.714rem';
 
-interface SidebarProps {}
-
-const Sidebar: React.FC<SidebarProps> = () => {
-  const {isLoading, folders, onSelect} = useNotebook(
+const Sidebar: React.FC = () => {
+  const {
+    isLoading,
+    folders,
+    onSelect,
+    loadFolders,
+    isCreatingNewFolder,
+    enterNewFolderMode,
+    selected,
+  } = useNotebook(
     state => ({
       isLoading: state.isFoldersLoading,
       folders: state.folders,
       onSelect: state.onSelect,
+      loadFolders: state.loadFolders,
+      isCreatingNewFolder: state.isCreatingNewFolder,
+      enterNewFolderMode: state.enterNewFolderMode,
+      selected: state.selected,
     }),
     shallow,
   );
@@ -21,37 +32,38 @@ const Sidebar: React.FC<SidebarProps> = () => {
   const notebookActions: SectionAction[] = [
     {
       name: 'New Notebook',
-      icon: TbFolderPlus,
-      onClick: () => {},
+      icon: FiFolderPlus,
+      onClick: enterNewFolderMode,
     },
     {
-      name: 'Refresh Notebooks',
-      icon: TbRefresh,
-      onClick: () => {},
+      name: 'Refresh',
+      icon: FiRefreshCw,
+      onClick: loadFolders,
     },
   ];
 
   return (
     <div
-      className="h-full bg-b-sidebar"
+      className="h-full bg-b-sidebar relative"
       style={{
         width: initialSidebarWidth,
       }}
     >
       <div className="drag h-[54px]" />
+      {isCreatingNewFolder && <div className="bg-black/60 absolute inset-0 z-10" />}
       {isLoading ? (
         <span className="px-4 text-sm text-t-muted">Loading...</span>
       ) : (
         <Section>
           <SectionHeader
-            title="Notebook"
+            title="Notebooks"
             actions={notebookActions}
           />
+          {isCreatingNewFolder && !selected && <NewFolder level={0} />}
           {folders && (
             <Tree
               folders={folders}
               onClick={folder => {
-                console.log(folder);
                 onSelect(folder);
               }}
             />

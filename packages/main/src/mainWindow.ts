@@ -72,6 +72,9 @@ async function createWindow() {
   // setup api
   await import('./lib/api');
 
+  // setup context menus
+  await import('./lib/tree');
+
   /**
    * If the 'show' property of the BrowserWindow's constructor is omitted from the initialization options,
    * it then defaults to 'true'. This can cause flickering as the window loads the html content,
@@ -83,9 +86,9 @@ async function createWindow() {
   browserWindow.on('ready-to-show', () => {
     browserWindow?.show();
 
-    // if (import.meta.env.DEV) {
-    //   browserWindow?.webContents.openDevTools();
-    // }
+    if (import.meta.env.DEV) {
+      browserWindow?.webContents.openDevTools();
+    }
   });
 
   browserWindow.on('close', () => {
