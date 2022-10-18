@@ -16,7 +16,7 @@ interface TreeFolderProps {
 
 // build every children's name into path array
 function buildPath(folder: Folder) {
-  let path = [folder.name];
+  let path = [folder._id];
 
   if (folder.children) {
     Object.values(folder.children).forEach(child => {
@@ -38,7 +38,7 @@ const TreeFolder: React.FC<TreeFolderProps> = ({folder, parentPath, level}) => {
 
   const {isOpen, onOpen, onClose, onClick} = useTree(
     state => ({
-      isOpen: state.opened.has(folder.name),
+      isOpen: state.opened.has(folder._id),
       onOpen: state.onOpen,
       onClose: state.onClose,
       onClick: state.onClick,
@@ -52,7 +52,7 @@ const TreeFolder: React.FC<TreeFolderProps> = ({folder, parentPath, level}) => {
       const path = buildPath(folder);
       onClose(path);
     } else {
-      onOpen(folder.name);
+      onOpen(folder._id);
     }
   }, [isOpen, onClick]);
 
@@ -61,10 +61,10 @@ const TreeFolder: React.FC<TreeFolderProps> = ({folder, parentPath, level}) => {
     if (onClick) {
       onClick(folder);
       if (!isOpen && folder.children) {
-        onOpen(folder.name);
+        onOpen(folder._id);
       }
     }
-  }, [isOpen, onClick, folder.children, folder.name]);
+  }, [isOpen, onClick, folder.children]);
 
   const isSelected = selectedFolder && selectedFolder._id === folder._id;
 
@@ -72,7 +72,7 @@ const TreeFolder: React.FC<TreeFolderProps> = ({folder, parentPath, level}) => {
   // with no children or closed
   useEffect(() => {
     if (isOpen === false && isSelected && isCreatingNewFolder) {
-      onOpen(folder.name);
+      onOpen(folder._id);
     }
   }, [isCreatingNewFolder]);
 
@@ -133,13 +133,18 @@ const TreeFolder: React.FC<TreeFolderProps> = ({folder, parentPath, level}) => {
           role="tree"
           aria-label={folder.name}
         >
-          {isSelected && isCreatingNewFolder && <NewFolder level={level + 1} />}
+          {isSelected && isCreatingNewFolder && (
+            <NewFolder
+              level={level + 1}
+              path={parentPath.concat(folder._id + ',')}
+            />
+          )}
           {Object.values(folder.children ?? {}).map(child => (
             <TreeFolder
               key={child._id}
               folder={child}
               level={level + 1}
-              parentPath={parentPath.concat(folder.name + ',')}
+              parentPath={parentPath.concat(folder._id + ',')}
             />
           ))}
         </ul>

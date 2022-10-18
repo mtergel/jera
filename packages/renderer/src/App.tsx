@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import useConfigStore from './lib/config';
-import {subscribeConfig} from '#preload';
+import {subscribeConfig, createDb} from '#preload';
 import Layout from './components/layout/Layout';
 import _set from 'lodash/set';
 import {IconContext} from 'react-icons';
@@ -23,6 +23,11 @@ function App() {
 
     loadCfg();
   }, []);
+
+  // TODO
+  useEffect(() => {
+    createDb();
+  });
 
   if (loading) {
     return null;

@@ -1,6 +1,6 @@
 import create from 'zustand';
 import _set from 'lodash/set';
-import db from '/@/lib/db';
+import {readFolders} from '#preload';
 
 interface NotebookState {
   // selected Folder
@@ -28,32 +28,6 @@ interface NotebookState {
   exitNewFolderMode: () => void;
 }
 
-const handleReadData = async (callback: (input: FolderPath) => void) => {
-  const res = await db.allDocs({
-    include_docs: true,
-  });
-
-  const pathIndex: FolderPath = {};
-  res.rows.forEach(row => {
-    if (row.doc) {
-      const doc: any = row.doc;
-
-      if (!doc.path) {
-        pathIndex[doc.name] = doc;
-        return;
-      } else {
-        const path = doc.path.split(',');
-        path.shift();
-        path.pop();
-        path.push(doc.name);
-        _set(pathIndex, path.join('.children.'), row.doc);
-      }
-    }
-  });
-
-  callback(pathIndex);
-};
-
 const useNotebook = create<NotebookState>()(set => ({
   selected: null,
   folders: {},
@@ -67,7 +41,7 @@ const useNotebook = create<NotebookState>()(set => ({
   loadFolders: async () => {
     set({isFoldersLoading: true});
 
-    await handleReadData(f => {
+    await readFolders(f => {
       set({
         isFoldersLoading: false,
         folders: f,

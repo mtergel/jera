@@ -3,28 +3,44 @@ import {SubmitHandler, useForm} from 'react-hook-form';
 import {FiFolder} from 'react-icons/fi';
 import shallow from 'zustand/shallow';
 import useNotebook from '/@/lib/notebook';
+import {createFolder} from '#preload';
 
 interface NewFolderProps {
   level: number;
+  path: string | null;
 }
 
 interface NewFolderForm {
   name: string;
 }
 
-const NewFolder: React.FC<NewFolderProps> = ({level}) => {
-  const {exitNewFolderMode} = useNotebook(
+const NewFolder: React.FC<NewFolderProps> = ({level, path}) => {
+  const {exitNewFolderMode, loadFolders} = useNotebook(
     state => ({
       exitNewFolderMode: state.exitNewFolderMode,
+      loadFolders: state.loadFolders,
     }),
     shallow,
   );
 
   const {register, handleSubmit} = useForm<NewFolderForm>();
-  const onSubmit: SubmitHandler<NewFolderForm> = ({name}) => {
+  const onSubmit: SubmitHandler<NewFolderForm> = async ({name}) => {
     if (!name) {
       exitNewFolderMode();
     }
+
+    console.log('Creating new folder: ', {
+      name,
+      path,
+    });
+
+    await createFolder({
+      name,
+      path,
+    });
+
+    await loadFolders();
+    exitNewFolderMode();
   };
 
   const handleBlur = useCallback(() => {

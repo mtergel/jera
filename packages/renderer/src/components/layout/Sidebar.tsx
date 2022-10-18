@@ -59,7 +59,12 @@ const Sidebar: React.FC = () => {
             title="Notebooks"
             actions={notebookActions}
           />
-          {isCreatingNewFolder && !selected && <NewFolder level={0} />}
+          {isCreatingNewFolder && !selected && (
+            <NewFolder
+              level={0}
+              path={null}
+            />
+          )}
           {folders && (
             <Tree
               folders={folders}
