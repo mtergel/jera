@@ -1,21 +1,31 @@
 import PouchDb from 'pouchdb';
+import PouchFind from 'pouchdb-find';
 import {nanoid} from 'nanoid';
 import _set from 'lodash/set';
 import _sortBy from 'lodash/sortBy';
 
+PouchDb.plugin(PouchFind);
+
 // TODO
 // make this remote, with auth or something
-
 let db: PouchDB.Database<{}>;
 
-const createDb = async () => {
+const createDb = async (callback: (changes: any) => void) => {
   db = new PouchDb('oxymoron');
 
-  db.changes({
-    since: 'now',
-    live: true,
-    include_docs: true,
-  }).on('change', changes => console.log(changes));
+  await db.createIndex({
+    index: {
+      fields: ['path'],
+    },
+  });
+
+  await db
+    .changes({
+      since: 'now',
+      live: true,
+      include_docs: true,
+    })
+    .on('change', callback);
 };
 
 const readFolders = async (callback: (input: FolderPath) => void) => {
@@ -79,4 +89,4 @@ const createFolder = async (input: {name: string; path: string | null}) => {
   });
 };
 
-export {readFolders, createFolder, createDb};
+export {readFolders, createFolder, createDb, db};

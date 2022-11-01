@@ -5,11 +5,14 @@ import Layout from './components/layout/Layout';
 import _set from 'lodash/set';
 import {IconContext} from 'react-icons';
 import {Provider} from '@radix-ui/react-tooltip';
+import useNotebook from './lib/notebook';
 
 function App() {
   const [loading, setLoading] = useState(true);
   const loadConfig = useConfigStore(state => state.loadConfig);
+  const loadFolders = useNotebook(state => state.loadFolders);
 
+  // setup subscriptions
   useEffect(() => {
     // setup callback
     subscribeConfig(() => {
@@ -24,10 +27,9 @@ function App() {
     loadCfg();
   }, []);
 
-  // TODO
   useEffect(() => {
-    createDb();
-  });
+    createDb(() => loadFolders());
+  }, []);
 
   if (loading) {
     return null;

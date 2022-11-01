@@ -4,21 +4,22 @@ import useTree from './useTree';
 
 interface TreeProps {
   folders: FolderPath;
-  onClick?: (node: Folder) => void;
+  onSelect?: (node: Folder) => void;
 }
 
-const Tree: React.FC<TreeProps> = ({folders, onClick}) => {
+const Tree: React.FC<TreeProps> = ({folders, onSelect}) => {
   const attachOnClickHandler = useTree(state => state.attachOnClickHandler);
 
   useEffect(() => {
-    if (onClick) {
-      attachOnClickHandler(onClick);
+    if (onSelect) {
+      attachOnClickHandler(onSelect);
     }
-  }, [onClick]);
+  }, [onSelect]);
+
+  // TODO setup event handlers
 
   return (
     <ul
-      tabIndex={0}
       aria-multiselectable={false}
       role="tree"
       aria-label="folders"

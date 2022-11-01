@@ -4051,6 +4051,106 @@
     "picocolors" "^1.0.0"
     "source-map-js" "^1.0.2"
 
+"pouchdb-abstract-mapreduce@7.3.0":
+  "integrity" "sha512-+2fVt3SDh7D776lIGbYZOsKX5js1aUyUw7iJaTGitxSdQ2ObWSTrr3SUrj5Qo1CkgPXwRM3Tdoq/53JYAa2qCA=="
+  "resolved" "https://registry.npmjs.org/pouchdb-abstract-mapreduce/-/pouchdb-abstract-mapreduce-7.3.0.tgz"
+  "version" "7.3.0"
+  dependencies:
+    "pouchdb-binary-utils" "7.3.0"
+    "pouchdb-collate" "7.3.0"
+    "pouchdb-collections" "7.3.0"
+    "pouchdb-errors" "7.3.0"
+    "pouchdb-fetch" "7.3.0"
+    "pouchdb-mapreduce-utils" "7.3.0"
+    "pouchdb-md5" "7.3.0"
+    "pouchdb-utils" "7.3.0"
+
+"pouchdb-binary-utils@7.3.0":
+  "integrity" "sha512-xvBH/XGHGcou2vkEzszJxkCc7YElfRUrkLUg51Jbdmh1mogLDUO0bU3Tj6TOIIJfRkQrU/HV+dDkMAhsil0amQ=="
+  "resolved" "https://registry.npmjs.org/pouchdb-binary-utils/-/pouchdb-binary-utils-7.3.0.tgz"
+  "version" "7.3.0"
+  dependencies:
+    "buffer-from" "1.1.2"
+
+"pouchdb-collate@7.3.0":
+  "integrity" "sha512-ys7rXKtEr6cfghgUjknwFJiOkITebV6JmeTybJKCzMV0r2luXu0OoPQsKVpE/wbM/3F5LxfpbFKGFpPcfGMvTA=="
+  "resolved" "https://registry.npmjs.org/pouchdb-collate/-/pouchdb-collate-7.3.0.tgz"
+  "version" "7.3.0"
+
+"pouchdb-collections@7.3.0":
+  "integrity" "sha512-Xr54m2+fErShXn+qAT4xwqJ+8NwddNPeTMJT4z4k1sZsrwfHmZsWbsKAyGPMF04eQaaU+7DDRMciu2VzaBUXyg=="
+  "resolved" "https://registry.npmjs.org/pouchdb-collections/-/pouchdb-collections-7.3.0.tgz"
+  "version" "7.3.0"
+
+"pouchdb-errors@7.3.0":
+  "integrity" "sha512-dTBbIC1BbCy6J9W/Csg5xROgb3wJN3HpbgAJHHSEtAkb8oA45KZmU3ZwEpNhf0AfPuQm4XgW1936PvlDlGgJiw=="
+  "resolved" "https://registry.npmjs.org/pouchdb-errors/-/pouchdb-errors-7.3.0.tgz"
+  "version" "7.3.0"
+  dependencies:
+    "inherits" "2.0.4"
+
+"pouchdb-fetch@7.3.0":
+  "integrity" "sha512-8/lcg8iMDG+GVs1dHNXA4ktJSEpH71dHU3xesMJ25tNQOqfAaaWrkfz9j71ZYDDkveLYE6UjUzl/sDacu2hSjw=="
+  "resolved" "https://registry.npmjs.org/pouchdb-fetch/-/pouchdb-fetch-7.3.0.tgz"
+  "version" "7.3.0"
+  dependencies:
+    "abort-controller" "3.0.0"
+    "fetch-cookie" "0.11.0"
+    "node-fetch" "2.6.7"
+
+"pouchdb-find@^7.3.0":
+  "integrity" "sha512-EwhnfyxCAkKf8PG4tfndTTygEmtuz+o1LiZkxfPrflfXA3m1jo1ithib0hwBYtEwEYWuZxH6B8pRZutbLoQCGA=="
+  "resolved" "https://registry.npmjs.org/pouchdb-find/-/pouchdb-find-7.3.0.tgz"
+  "version" "7.3.0"
+  dependencies:
+    "pouchdb-abstract-mapreduce" "7.3.0"
+    "pouchdb-collate" "7.3.0"
+    "pouchdb-errors" "7.3.0"
+    "pouchdb-fetch" "7.3.0"
+    "pouchdb-md5" "7.3.0"
+    "pouchdb-selector-core" "7.3.0"
+    "pouchdb-utils" "7.3.0"
+
+"pouchdb-mapreduce-utils@7.3.0":
+  "integrity" "sha512-KDVSd+H2r+XWTrQfKWV71SknDDYRjYXoeWs0ZQl3xITHCcTl+fIgqyagg/XN+Zy/U9LeLPGMe2JdgPx9H8lJgw=="
+  "resolved" "https://registry.npmjs.org/pouchdb-mapreduce-utils/-/pouchdb-mapreduce-utils-7.3.0.tgz"
+  "version" "7.3.0"
+  dependencies:
+    "argsarray" "0.0.1"
+    "inherits" "2.0.4"
+    "pouchdb-collections" "7.3.0"
+    "pouchdb-utils" "7.3.0"
+
+"pouchdb-md5@7.3.0":
+  "integrity" "sha512-wL04QgoKyd/L/TV5gxgcvlEyCJiZoXCOEFJklTzkdza/kBQNJGPH7i0ZhKa7Sb+AvZYoWZHddf1Zgv7rBScHkA=="
+  "resolved" "https://registry.npmjs.org/pouchdb-md5/-/pouchdb-md5-7.3.0.tgz"
+  "version" "7.3.0"
+  dependencies:
+    "pouchdb-binary-utils" "7.3.0"
+    "spark-md5" "3.0.2"
+
+"pouchdb-selector-core@7.3.0":
+  "integrity" "sha512-sK/cCrIGeL9ImcMhKGcwa54+bzX7Wv4hhVV+oUW3T1Nasaoxh+Muem1GuA+x1+SbTCE8y37rUg8i6DIOhX51ew=="
+  "resolved" "https://registry.npmjs.org/pouchdb-selector-core/-/pouchdb-selector-core-7.3.0.tgz"
+  "version" "7.3.0"
+  dependencies:
+    "pouchdb-collate" "7.3.0"
+    "pouchdb-utils" "7.3.0"
+
+"pouchdb-utils@7.3.0":
+  "integrity" "sha512-HH+5IXXWn/ZgVCSnrlydBMYn6MabT7RS7SNoo9w8qVH9efpZSp3eLchw6yMQNLw8LQefWmbbskiHV9VgJmSVWQ=="
+  "resolved" "https://registry.npmjs.org/pouchdb-utils/-/pouchdb-utils-7.3.0.tgz"
+  "version" "7.3.0"
+  dependencies:
+    "argsarray" "0.0.1"
+    "clone-buffer" "1.0.0"
+    "immediate" "3.3.0"
+    "inherits" "2.0.4"
+    "pouchdb-collections" "7.3.0"
+    "pouchdb-errors" "7.3.0"
+    "pouchdb-md5" "7.3.0"
+    "uuid" "8.3.2"
+
 "pouchdb@^7.3.0":
   "integrity" "sha512-OwsIQGXsfx3TrU1pLruj6PGSwFH+h5k4hGNxFkZ76Um7/ZI8F5TzUHFrpldVVIhfXYi2vP31q0q7ot1FSLFYOw=="
   "resolved" "https://registry.npmjs.org/pouchdb/-/pouchdb-7.3.0.tgz"

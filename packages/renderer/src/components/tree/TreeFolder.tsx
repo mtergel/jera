@@ -27,6 +27,7 @@ function buildPath(folder: Folder) {
   return path;
 }
 
+// TODO add focused classes
 const TreeFolder: React.FC<TreeFolderProps> = ({folder, parentPath, level}) => {
   const {selectedFolder, isCreatingNewFolder} = useNotebook(
     state => ({
@@ -82,7 +83,10 @@ const TreeFolder: React.FC<TreeFolderProps> = ({folder, parentPath, level}) => {
     if (treeRef.current) {
       treeRef.current.addEventListener('contextmenu', e => {
         e.preventDefault();
-        showTreeContext();
+
+        if (e.target && (e.target as any).id) {
+          showTreeContext(folder._id);
+        }
       });
     }
   }, []);
@@ -90,8 +94,13 @@ const TreeFolder: React.FC<TreeFolderProps> = ({folder, parentPath, level}) => {
   return (
     <li
       role="treeitem"
-      tabIndex={-1}
+      aria-level={level}
+      aria-expanded={isOpen}
+      aria-selected={isSelected ? 'true' : 'false'}
+      tabIndex={isSelected ? 0 : -1}
+      aria-label={folder.name}
       ref={treeRef}
+      id={folder._id}
     >
       <div
         onClick={handleOnClick}
@@ -99,14 +108,19 @@ const TreeFolder: React.FC<TreeFolderProps> = ({folder, parentPath, level}) => {
           'rounded-lg py-2 px-4',
           isSelected ? 'bg-accent-sidebar text-t-primary' : 'text-t-muted',
         )}
+        id={folder._id}
       >
         <div
           style={{
             paddingLeft: `calc(1rem * ${level * 0.5})`,
           }}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 select-none"
+          id={folder._id}
         >
-          <span>
+          <span
+            aria-hidden
+            id={folder._id}
+          >
             {folder.children ? (
               <FiChevronRight
                 className={clsx(
@@ -118,12 +132,18 @@ const TreeFolder: React.FC<TreeFolderProps> = ({folder, parentPath, level}) => {
                     : 'text-t-muted',
                 )}
                 onClick={toggleOpen}
+                id={folder._id}
               />
             ) : (
-              <FiFolder />
+              <FiFolder id={folder._id} />
             )}
           </span>
-          <span className="flex-1">{folder.name}</span>
+          <span
+            className="flex-1"
+            id={folder._id}
+          >
+            {folder.name}
+          </span>
         </div>
       </div>
       {isOpen && (

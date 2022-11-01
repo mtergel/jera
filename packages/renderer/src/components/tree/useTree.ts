@@ -11,6 +11,9 @@ interface TreeState {
   attachOnClickHandler: (callback: OnClickHandler) => void;
 }
 
+// TODO
+// Add focused and methods to move focus
+
 const useTree = create<TreeState>()(set => ({
   opened: new Set<string>(),
 

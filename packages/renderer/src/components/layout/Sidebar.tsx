@@ -68,7 +68,7 @@ const Sidebar: React.FC = () => {
           {folders && (
             <Tree
               folders={folders}
-              onClick={folder => {
+              onSelect={folder => {
                 onSelect(folder);
               }}
             />
