@@ -1,16 +1,23 @@
 import {useEffect, useState} from 'react';
 import useConfigStore from './lib/config';
-import {subscribeConfig, createDb} from '#preload';
+import {subscribeConfig, createDb, setTreeContextCallback} from '#preload';
 import Layout from './components/layout/Layout';
 import _set from 'lodash/set';
 import {IconContext} from 'react-icons';
 import {Provider} from '@radix-ui/react-tooltip';
 import useNotebook from './lib/notebook';
+import shallow from 'zustand/shallow';
 
 function App() {
   const [loading, setLoading] = useState(true);
   const loadConfig = useConfigStore(state => state.loadConfig);
-  const loadFolders = useNotebook(state => state.loadFolders);
+  const notebook = useNotebook(
+    state => ({
+      loadFolders: state.loadFolders,
+      handleNewFolderFromContext: state.handleNewFolderFromContext,
+    }),
+    shallow,
+  );
 
   // setup subscriptions
   useEffect(() => {
@@ -28,7 +35,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    createDb(() => loadFolders());
+    // setup callback
+    setTreeContextCallback({
+      newFolder: notebook.handleNewFolderFromContext,
+    });
+
+    createDb(() => notebook.loadFolders());
   }, []);
 
   if (loading) {

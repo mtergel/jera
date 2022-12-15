@@ -61,4 +61,7 @@ thumbs.db
 .jera.js
 .jera_plugins
 packages/.jera.js
-.oxymoron/*
+
+# dev db
+oxymoron
+oxymoron-mrview-fd3556cf2d555d6d9a617ab2d808995c

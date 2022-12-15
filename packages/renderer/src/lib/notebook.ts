@@ -26,6 +26,9 @@ interface NotebookState {
 
   // exit new folder mode
   exitNewFolderMode: () => void;
+
+  // context handler
+  handleNewFolderFromContext: (folderId: string) => void;
 }
 
 const useNotebook = create<NotebookState>()(set => ({
@@ -40,6 +43,8 @@ const useNotebook = create<NotebookState>()(set => ({
     })),
   loadFolders: async () => {
     set({isFoldersLoading: true});
+
+    // setup callback
 
     await readFolders(f => {
       set({
@@ -58,6 +63,16 @@ const useNotebook = create<NotebookState>()(set => ({
     set(() => ({
       isCreatingNewFolder: false,
     })),
+
+  handleNewFolderFromContext: folderId =>
+    set(state => {
+      if (state.folders[folderId]) {
+        return {
+          selected: state.folders[folderId],
+          isCreatingNewFolder: true,
+        };
+      } else return {};
+    }),
 }));
 
 export default useNotebook;
